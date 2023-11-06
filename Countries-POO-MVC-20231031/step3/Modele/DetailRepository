@@ -1,0 +1,38 @@
+<?php
+
+namespace eilco\web\model;
+
+class Repository
+{
+   //protected function connect()
+   //{
+      //return new PDO ('mysql:host=localhost;dbname=db_countries', 'root', '');
+   //}
+//}
+
+require_once('Repository.php');
+class DetailRepository extends Repository
+{
+    public function getDetails($countryId)
+    {
+        $db = $this->connect();
+
+        $req = $db->prepare('SELECT * FROM details WHERE country_id = ?');
+        $req->execute([$countryId]);
+
+        return $req;
+    }
+
+    public function saveCountryDetail($countryId, $label, $value)
+    {
+        $db = $this->connect();
+
+        $req = $db->prepare('INSERT INTO details(country_id, label value) VALUES (:countryId, :label, :value)');
+        $result = $req->execute([
+            'countryId' => $countryId,
+            'label' => $label,
+            'value' => $value
+        ]);
+        return $result;
+    }
+}

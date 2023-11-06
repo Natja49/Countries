@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+main {
+  max-width: 80%;
+  margin: 0 auto;
+}
+.countriesList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.btn {
+  text-decoration: none;
+  border: 1px solid black;
+  background-color: lightsteelblue;
+  color: black;
+  padding: 1%;
+  font-weight: 700;
+}

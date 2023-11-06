@@ -1,0 +1,37 @@
+<?php
+
+namespace eilco\web\model;
+
+class Repository
+{
+   protected function connect()
+   {
+      return new \PDO('mysql:host=localhost;dbname=db_countries', 'root', '');
+   }
+}
+
+require_once('Repository.php');
+
+class CountryRepository extends Repository
+{
+   public function getCountries()
+   {
+      $db = $this->connect();
+
+      $req = $db->prepare('SELECT * FROM countries');
+      $req->execute();
+
+      return $req;
+   }
+
+
+   public function getCountry($countryId)
+   {
+      $db = $this->connect();
+
+      $req = $db->prepare('SELECT * FROM countries WHERE id = ?');
+      $req->execute([$countryId]);
+
+      return $req->Fetch();
+   }
+}
